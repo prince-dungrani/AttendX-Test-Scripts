@@ -1,36 +1,31 @@
 
 import unittest
 
-# Sample login logic for demonstration.
-# Replace this with the actual AttendX login/API when available.
 
 def login(username, password):
-    if not username or not password:
-        return "Username and password are required"
-    if username == "student1" and password == "Pass123":
+    """Simple login function for testing."""
+    if username == "admin" and password == "admin123":
         return "Login successful"
     return "Invalid username or password"
 
 
-class LoginTest(unittest.TestCase):
+class TestLogin(unittest.TestCase):
 
     def test_valid_login(self):
-        self.assertEqual(
-            login("student1", "Pass123"),
-            "Login successful"
-        )
+        result = login("admin", "admin123")
+        self.assertEqual(result, "Login successful")
 
-    def test_wrong_password(self):
-        self.assertEqual(
-            login("student1", "wrong"),
-            "Invalid username or password"
-        )
+    def test_invalid_password(self):
+        result = login("admin", "wrong123")
+        self.assertEqual(result, "Invalid username or password")
 
-    def test_empty_fields(self):
-        self.assertEqual(
-            login("", ""),
-            "Username and password are required"
-        )
+    def test_invalid_username(self):
+        result = login("user", "admin123")
+        self.assertEqual(result, "Invalid username or password")
+
+    def test_empty_credentials(self):
+        result = login("", "")
+        self.assertEqual(result, "Invalid username or password")
 
 
 if __name__ == "__main__":
